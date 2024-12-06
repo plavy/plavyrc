@@ -7,7 +7,7 @@ function drc {
   mkdir ${CLONE_DIR}
   git clone https://github.com/plavy/plavyrc.git ${CLONE_DIR}
   echo "Creating backup of previous ${RC_FILE}"
-  cp ~/${RC_FILE} ~/${RC_FILE}-previous
+  cp ~/${RC_FILE} ~/${RC_FILE}.backup
   echo "Updating ${RC_FILE}"
   cp ${CLONE_DIR}/${RC_FILE} ~/${RC_FILE}
   echo "Updated. Exiting current shell"
