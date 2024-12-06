@@ -33,7 +33,14 @@ function mr {
   fi
 }
 
-alias add='git add .;s'
+function add {
+    if [[ -z $1 ]]; then
+      git add .
+    else
+      git add $1
+    fi
+    git status
+}
 function push {
   git commit --allow-empty -m "$*"
   if ! git push; then
