@@ -1,0 +1,51 @@
+# rc
+alias vrc='vim ~/.plavyrc'
+
+# git
+alias c='git clone'
+alias p='pull'
+alias s='git status'
+alias b='git checkout'
+
+alias m='git checkout main; git pull --prune'
+function mr {
+  if [[ -d ".git" ]]; then
+    echo "WARNING Current dir will be deleted"
+    sleep 3
+    REMOTE_URL=$(git config remote.origin.url)
+    rm -rf * .*
+    git clone ${REMOTE_URL} .
+  else
+    echo "ERROR Must be run in git repo root"
+  fi
+}
+
+alias add='git add .;s'
+function push(){
+  git commit --allow-empty -m "$*"
+  if ! git push; then
+    OUTPUT=$(git push 2>&1)
+    if [[ "$OUTPUT" =~ "has no upstream branch" ]]; then
+      echo "Setting upstream automatically"
+      git push --set-upstream origin $(git branch --show-current)
+    fi
+  fi
+}
+
+# work
+alias work='cd ~/work'
+# for dir in $(ls ~/work); do
+#   alias $dir="cd ~/work/$dir"
+# done
+
+# kubectl
+alias kube='cd ~/.kube'
+function use(){
+  cp ~/.kube/$1 ~/.kube/config
+}
+complete -W "$(IFS= ; echo $(ls ~/.kube))" use
+
+# other
+alias ll='ls -alh --group-directories-first'
+alias watch='watch -n 1'
+alias w='watch'
