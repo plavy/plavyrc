@@ -16,7 +16,7 @@ function drc {
 
 # git
 alias c='git clone'
-alias p='pull'
+alias p='git pull'
 alias s='git status'
 alias b='git switch'
 
