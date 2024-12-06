@@ -66,7 +66,14 @@ function use(){
 complete -W "$(IFS= ; echo $(ls ~/.kube))" use
 
 # env tokens
-alias load-tokens='source ~/.tokens'
+function load-tokens {
+  TOKENS_PATH=~/.tokens
+  if [[ -f ${TOKENS_PATH} ]]; then
+    source ${TOKENS_PATH}
+  else
+    echo "ERROR No tokens file found: ${TOKENS_PATH}"
+  fi
+}
 
 # watch
 alias watch='watch -n 1'
