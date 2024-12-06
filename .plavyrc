@@ -1,5 +1,19 @@
 # rc
 alias vrc='vim ~/.plavyrc'
+function drc {
+  CLONE_DIR=/tmp/plavyrc
+  RC_FILE=.plavyrc
+  rm -rf  ${CLONE_DIR} || true
+  mkdir ${CLONE_DIR}
+  git clone https://github.com/plavy/plavyrc.git ${CLONE_DIR}
+  echo "Creating backup of previous ${RC_FILE}"
+  cp ~/${RC_FILE} ~/${RC_FILE}-previous
+  echo "Updating ${RC_FILE}"
+  cp ${CLONE_DIR}/${RC_FILE} ~/${RC_FILE}
+  echo "Updated. Exiting current shell"
+  sleep 3
+  exit
+}
 
 # git
 alias c='git clone'
@@ -21,7 +35,7 @@ function mr {
 }
 
 alias add='git add .;s'
-function push(){
+function push {
   git commit --allow-empty -m "$*"
   if ! git push; then
     OUTPUT=$(git push 2>&1)
