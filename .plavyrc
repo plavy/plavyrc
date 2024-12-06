@@ -20,7 +20,7 @@ alias p='pull'
 alias s='git status'
 alias b='git switch'
 
-alias m='git checkout main; git pull --prune'
+alias m='git switch main; git pull --prune'
 function mr {
   if [[ -d ".git" ]]; then
     echo "WARNING Current dir will be deleted"
