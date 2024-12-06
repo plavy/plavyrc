@@ -10,9 +10,8 @@ function drc {
   cp ~/${RC_FILE} ~/${RC_FILE}.backup
   echo "Updating ${RC_FILE}"
   cp ${CLONE_DIR}/${RC_FILE} ~/${RC_FILE}
-  sleep 3
   source ~/${RC_FILE}
-  echo "New plavyrc sourced"
+  echo "New ${RC_FILE} sourced"
 }
 
 # git
