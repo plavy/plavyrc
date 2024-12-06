@@ -67,4 +67,4 @@ alias watch='watch -n 1'
 alias w='watch'
 
 # basic
-alias ll='ls -alh --group-directories-first'
+alias ll='ls -lah'
