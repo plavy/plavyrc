@@ -60,7 +60,7 @@ alias work='cd ~/work'
 
 # kubectl
 alias kube='cd ~/.kube'
-function use(){
+function use {
   cp ~/.kube/$1 ~/.kube/config
 }
 complete -W "$(IFS= ; echo $(ls ~/.kube))" use
