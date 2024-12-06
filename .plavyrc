@@ -18,7 +18,7 @@ function drc {
 alias c='git clone'
 alias p='pull'
 alias s='git status'
-alias b='git checkout'
+alias b='git switch'
 
 alias m='git checkout main; git pull --prune'
 function mr {
