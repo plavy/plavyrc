@@ -45,7 +45,12 @@ function use(){
 }
 complete -W "$(IFS= ; echo $(ls ~/.kube))" use
 
-# other
-alias ll='ls -alh --group-directories-first'
+# env tokens
+alias load-tokens='source ~/.tokens'
+
+# watch
 alias watch='watch -n 1'
 alias w='watch'
+
+# basic
+alias ll='ls -alh --group-directories-first'
