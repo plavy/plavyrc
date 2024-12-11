@@ -30,7 +30,7 @@ function mr {
     git clone ${REMOTE_URL} .
   else
     echo "ERROR Must be run in git repo root"
-    exit 1
+    return 1
   fi
 }
 
