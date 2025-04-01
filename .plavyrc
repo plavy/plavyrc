@@ -55,9 +55,13 @@ function push {
 
 # work
 alias work='cd ~/work'
+alias w='work'
 # for dir in $(ls ~/work); do
 #   alias $dir="cd ~/work/$dir"
 # done
+
+# vscode
+alias v='code .'
 
 # kubectl
 alias kube='cd ~/.kube'
@@ -78,7 +82,6 @@ function load-tokens {
 
 # watch
 alias watch='watch -n 1'
-alias w='watch'
 
 # basic
 alias ll='ls -lah'
