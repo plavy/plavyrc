@@ -67,6 +67,7 @@ alias v='code .'
 alias kube='cd ~/.kube'
 function use {
   cp ~/.kube/$1 ~/.kube/config
+  k9s
 }
 complete -W "$(IFS= ; echo $(ls ~/.kube))" use
 
