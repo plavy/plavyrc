@@ -63,6 +63,9 @@ alias w='work'
 # vscode
 alias v='code .'
 
+# aws
+export AWS_CLI_AUTO_PROMPT="on-partial"
+
 # kubectl
 alias kube='cd ~/.kube'
 function use {
