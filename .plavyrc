@@ -42,15 +42,23 @@ function add {
     fi
     git status
 }
+
 function push {
   git commit --allow-empty -m "$*"
   if ! git push; then
     OUTPUT=$(git push 2>&1)
-    if [[ "$OUTPUT" =~ "has no upstream branch" ]]; then
+    if [[ "${OUTPUT}" =~ "has no upstream branch" ]]; then
       echo "Setting upstream automatically"
       git push --set-upstream origin $(git branch --show-current)
     fi
   fi
+}
+
+function ct {
+  DIR_NAME=/tmp/git-repo-$(date +%s)
+  mkdir ${DIR_NAME}
+  git clone $1 ${DIR_NAME}
+  code ${DIR_NAME}
 }
 
 # work
