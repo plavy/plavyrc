@@ -55,7 +55,8 @@ function push {
 }
 
 function ct {
-  DIR_NAME=/tmp/git-repo-$(date +%s)
+  REPO_NAME=$(basename ${1%.git})
+  DIR_NAME=/tmp/${REPO_NAME}-$(date +%s)
   mkdir ${DIR_NAME}
   git clone $1 ${DIR_NAME}
   code ${DIR_NAME}
