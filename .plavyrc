@@ -78,8 +78,14 @@ export AWS_CLI_AUTO_PROMPT="on-partial"
 # kubectl
 alias kube='cd ~/.kube'
 function use {
-  cp ~/.kube/$1 ~/.kube/config
-  k9s
+  KUBECONFIG_PATH=$1
+  if [[ -f ${KUBECONFIG_PATH} ]]; then
+    cp ~/.kube/$1 ~/.kube/config
+    k9s
+  else
+    echo "ERROR: Kubeconfig ${KUBECONFIG_PATH} does not exist"
+    return 1
+  fi
 }
 complete -W "$(IFS= ; echo $(ls ~/.kube))" use
 
