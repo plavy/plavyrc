@@ -15,7 +15,6 @@ function drc {
 }
 
 # git
-alias c='git clone'
 alias p='git pull'
 alias s='git status'
 alias b='git switch'
@@ -55,11 +54,34 @@ function push {
 }
 
 function ct {
+  if [ -z "$1" ]; then
+    echo "Usage: ct <git-url>"
+    return 1
+  fi
   REPO_NAME=$(basename ${1%.git})
   DIR_NAME=/tmp/${REPO_NAME}-$(date +%s)
   mkdir ${DIR_NAME}
   git clone $1 ${DIR_NAME}
   code ${DIR_NAME}
+}
+
+function c {
+  if [ -z "$1" ]; then
+    echo "Usage: c <git-url>"
+    return 1
+  fi
+  URL=$1
+  PATH_FROM_URL=$(echo "$URL" | sed -e 's|git@||' -e 's|\.git$||' -e 's|:|/|' -e 's|https://||' -e 's|http://||')
+  TARGET_DIR=~/work/$PATH_FROM_URL
+  if [ -d ${TARGET_DIR} ]; then
+    echo "WARNING Directory ${TARGET_DIR} already exists."
+    cd ${TARGET_DIR}
+    git pull
+  else
+    mkdir -p ${TARGET_DIR}
+    git clone ${URL} ${TARGET_DIR}
+    cd ${TARGET_DIR}
+  fi
 }
 
 # work
