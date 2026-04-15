@@ -99,6 +99,7 @@ export AWS_CLI_AUTO_PROMPT="on-partial"
 
 # kubectl
 alias kube='cd ~/.kube'
+
 function use {
   KUBECONFIG_PATH=~/.kube/$1
   if [[ -f ${KUBECONFIG_PATH} ]]; then
@@ -110,6 +111,20 @@ function use {
   fi
 }
 complete -W "$(IFS= ; echo $(ls ~/.kube))" use
+
+function use-aws {
+  # Requires AWS_PROFILE and AWS_DEFAULT_REGION
+  aws sso login
+  if [[ -f ~/.kube/config ]]; then
+    rm ~/.kube/config
+  fi
+  CLUSTER_NAME=$1
+  KUBECONFIG_PATH=~/.kube/$1
+  aws eks update-kubeconfig --name ${CLUSTER_NAME}
+  cp ~/.kube/config ${KUBECONFIG_PATH}
+  k9s
+}
+complete -W "$(IFS= ; echo $(ls ~/.kube))" use-aws
 
 # env tokens
 function load-tokens {
