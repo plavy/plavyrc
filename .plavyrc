@@ -104,6 +104,7 @@ function use {
   KUBECONFIG_PATH=~/.kube/$1
   if [[ -f ${KUBECONFIG_PATH} ]]; then
     cp ${KUBECONFIG_PATH} ~/.kube/config
+    kubectl get --raw /livez 1>/dev/null && \
     k9s
   else
     echo "ERROR: Kubeconfig ${KUBECONFIG_PATH} does not exist"
