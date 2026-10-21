@@ -112,7 +112,7 @@ function use {
 }
 complete -W "$(IFS= ; echo $(ls ~/.kube))" use
 
-function use-aws {
+function aws-use {
   # Requires AWS_PROFILE and AWS_DEFAULT_REGION
   aws sso login
   if [[ -f ~/.kube/config ]]; then
@@ -120,11 +120,10 @@ function use-aws {
   fi
   CLUSTER_NAME=$1
   KUBECONFIG_PATH=~/.kube/$1
-  aws eks update-kubeconfig --name ${CLUSTER_NAME}
-  cp ~/.kube/config ${KUBECONFIG_PATH}
-  k9s
+  aws eks update-kubeconfig --name ${CLUSTER_NAME} && \
+  use ${CLUSTER_NAME}
 }
-complete -W "$(IFS= ; echo $(ls ~/.kube))" use-aws
+complete -W "$(IFS= ; echo $(ls ~/.kube))" aws-use
 
 # env tokens
 function load-tokens {
