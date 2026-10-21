@@ -71,7 +71,11 @@ function c {
     return 1
   fi
   URL=$1
-  PATH_FROM_URL=$(echo "$URL" | sed -e 's|git@||' -e 's|\.git$||' -e 's|:|/|' -e 's|https://||' -e 's|http://||')
+  PATH_FROM_URL=$(echo "$URL" | sed -E \
+    -e 's|^[a-zA-Z0-9+-]+://||' \
+    -e 's|^git@||' \
+    -e 's|\.git$||' \
+    -e 's|:|/|g')  
   TARGET_DIR=~/work/$PATH_FROM_URL
   if [ -d ${TARGET_DIR} ]; then
     echo "WARNING Directory ${TARGET_DIR} already exists."
